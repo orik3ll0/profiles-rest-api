@@ -11,7 +11,7 @@ class UserProfileManager(BaseUserManager):
         if not email:
             raise ValueError("User must have an email address")
         email = self.normalize_email(email)
-        user = self.model(email=email, name=name)
+        user = self.model(email=email, name=name,)
 
         user.set_password(password)
         user.save(using=self._db)
@@ -21,7 +21,7 @@ class UserProfileManager(BaseUserManager):
 
     def create_superuser(self, email, name, password):
         """Create amd save a new superuser with given details"""
-        user = self.create_user(email, name. password)
+        user = self.create_user(email, name, password,)
 
         user.is_superuser = True
         user.is_staff = True
@@ -37,10 +37,10 @@ class UserProfile(AbstractBaseUser, PermissionsMixin):
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
 
-    # objects = UserPrfileManager()
+    objects = UserProfileManager()
 
     USERNAME_FIELD = 'email'
-    REUIRED_FIELDS = ['name']
+    REQUIRED_FIELDS = ['name']
 
     def get_full_name(self):
         """Retrieve full name of user"""
@@ -48,7 +48,7 @@ class UserProfile(AbstractBaseUser, PermissionsMixin):
 
     def get_short_name(self):
         """Retrieve short name of user"""
-        return self.NAME
+        return self.name
 
     def __str__(self):
         """return string representation of our user"""

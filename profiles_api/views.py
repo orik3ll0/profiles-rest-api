@@ -39,10 +39,8 @@ class HelloApiView(APIView):
 
     def patch(self, request, pk=None):
         """Handle a partial update of an object. It is updating exact column"""
-
         return Response( { 'method':'PATCH' } )
 
     def delete(self, request, pk=None):
         """Delete an object"""
-
         return Response( { 'method':"DELETE" } )
